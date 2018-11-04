@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'reversion',
+    'django_object_actions',
 
     'django_bind',
 ]

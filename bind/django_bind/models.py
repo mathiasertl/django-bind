@@ -44,7 +44,10 @@ class Zone(BaseModel):
     domain = models.CharField(max_length=255)
     template = models.TextField()
 
-    zones = models.ManyToManyField(View, blank=True)
+    views = models.ManyToManyField(View, blank=True)
 
     def __str__(self):
         return self.domain
+
+    def render_template(self, view=None):
+        return self.template

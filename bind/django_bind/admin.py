@@ -15,8 +15,11 @@
 
 
 from django.contrib import admin
+from django.http import HttpResponse
+from django.utils.translation import ugettext_lazy as _
 
 from reversion.admin import VersionAdmin
+from django_object_actions import DjangoObjectActions
 
 from .models import Macro
 from .models import View
@@ -34,5 +37,9 @@ class ViewAdmin(VersionAdmin):
 
 
 @admin.register(Zone)
-class ZoneAdmin(VersionAdmin):
-    pass
+class ZoneAdmin(DjangoObjectActions, VersionAdmin):
+    change_actions = ['render_template']
+
+    def render_template(self, request, obj):
+        return HttpResponse(obj.render_template, view=request.GET.get('view'))
+    render_template.label = _('Render')
