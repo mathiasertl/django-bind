@@ -1,0 +1,8 @@
+*.py[co]
+*.sw[po]
+*.sqlite3
+*.egg-info
+localsettings.py
+/.tox/
+/docs/build/
+/pip-selfcheck.json
