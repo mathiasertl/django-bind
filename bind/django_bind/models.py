@@ -17,20 +17,23 @@ from django.db import models
 
 
 class BaseModel(models.Model):
+    # Just adds created/updated to every model that inherits from this class
     created = models.DateTimeField(auto_now=True)
-    expires = models.DateTimeField(null=False, blank=False)
+    updated = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
 
 
+class Macro(BaseModel):
+    name = models.CharField(max_length=255)
+    template = models.TextField()
+
+
 class View(BaseModel):
-    name = models.CharField()
+    name = models.CharField(max_length=255)
 
 
 class Zone(BaseModel):
-    created = models.DateTimeField(auto_now=True)
-    expires = models.DateTimeField(null=False, blank=False)
-
-    domain = models.CharField()
+    domain = models.CharField(max_length=255)
     template = models.TextField()
