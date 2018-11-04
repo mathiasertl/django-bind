@@ -29,11 +29,22 @@ class Macro(BaseModel):
     name = models.CharField(max_length=255)
     template = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 class View(BaseModel):
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class Zone(BaseModel):
     domain = models.CharField(max_length=255)
     template = models.TextField()
+
+    zones = models.ManyToManyField(View, blank=True)
+
+    def __str__(self):
+        return self.domain
