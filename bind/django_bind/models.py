@@ -13,7 +13,11 @@
 # You should have received a copy of the GNU General Public License along with django-bind.  If not,
 # see <http://www.gnu.org/licenses/>.
 
+from datetime import datetime
+
 from django.db import models
+from django.template import Context
+from django.template import Template
 
 
 class BaseModel(models.Model):
@@ -50,4 +54,17 @@ class Zone(BaseModel):
         return self.domain
 
     def render_template(self, view=None):
-        return self.template
+        template = '{%% load zones %%} %s' % self.template
+
+        if view is not None:
+            view = self.views.get(name=view)
+
+        serial = datetime.utcnow().strftime('%Y%m%d%H%M%S')
+
+        t = Template(template)
+        c = Context({
+            'domain': self.domain,
+            'serial': serial,
+            'view': view,
+        })
+        return t.render(c)
