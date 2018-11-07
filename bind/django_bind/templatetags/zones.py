@@ -44,3 +44,8 @@ def macro(context, name, **kwargs):
 
     t = template.Template(macro.template)
     return mark_safe(t.render(context))
+
+
+@register.simple_tag
+def set(val=None):
+    return val
