@@ -2,7 +2,7 @@
 
 Try POC:
 
-You need Python3 (tested with 3.6 - but any version should work) and virtualenv.
+You need Python3 (tested with 3.6 - but 3.5+ should work) and virtualenv.
 
 ```
 git clone https://github.com/mathiasertl/django-bind.git
