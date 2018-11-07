@@ -1,0 +1,64 @@
+[
+{
+    "model": "django_bind.macro",
+    "pk": 1,
+    "fields": {
+        "created": "2018-11-04T17:05:55.346Z",
+        "updated": "2018-11-04T17:05:55.346Z",
+        "name": "test",
+        "template": "test macro: {% if foo %}got foo{% endif %}"
+    }
+},
+{
+    "model": "django_bind.macro",
+    "pk": 2,
+    "fields": {
+        "created": "2018-11-04T17:21:13.773Z",
+        "updated": "2018-11-04T17:18:16.335Z",
+        "name": "header",
+        "template": "@       IN      SOA     ns1.{{ domain }}. hostmaster.{{ domain }}. (\r\n                   {{ serial }}           ; Serial\r\n                         3600           ; Refresh [1h]\r\n                          600           ; Retry   [10m]\r\n                        86400           ; Expire  [1d]\r\n                          600 )         ; Negative Cache TTL [1h]\r\n;"
+    }
+},
+{
+    "model": "django_bind.macro",
+    "pk": 3,
+    "fields": {
+        "created": "2018-11-04T17:19:05.113Z",
+        "updated": "2018-11-04T17:19:05.113Z",
+        "name": "nameservers",
+        "template": "@                               NS      ns1\r\n@                               NS      ns2\r\n\r\nns1                             A       78.47.108.74\r\nns1                             AAAA    2a01:4f8:c17:5f2::2\r\nns2                             A       5.45.105.108\r\nns2                             AAAA    2a03:4000:6:115b::2"
+    }
+},
+{
+    "model": "django_bind.view",
+    "pk": 1,
+    "fields": {
+        "created": "2018-11-04T16:29:02.769Z",
+        "updated": "2018-11-04T16:29:02.769Z",
+        "name": "external"
+    }
+},
+{
+    "model": "django_bind.view",
+    "pk": 2,
+    "fields": {
+        "created": "2018-11-04T16:29:07.006Z",
+        "updated": "2018-11-04T16:29:07.006Z",
+        "name": "internal"
+    }
+},
+{
+    "model": "django_bind.zone",
+    "pk": 1,
+    "fields": {
+        "created": "2018-11-07T19:43:16.586Z",
+        "updated": "2018-11-04T16:30:42.468Z",
+        "domain": "jabber.at",
+        "template": "{% macro \"header\" %}\r\n{% macro \"nameservers\" %}\r\n\r\n{% if view.name == \"internal\" %}\r\n     {% set \"1.2.3.4\" as titan4 %}\r\n{% else %}\r\n    {% set \"88.99.81.6\" as titan4 %}\r\n{% endif %}\r\n\r\n{% caa \"letsencrypt.org\" %}\r\n\r\nxmpp                            A       {{ titan4 }}\r\n{% if view.name == \"internal\" %}\r\nxmpp                            AAAA    2001::1\r\n{% endif %}\r\n\r\n{% macro \"test\" foo=\"bar\" %}\r\n{% macro \"test\" %}",
+        "views": [
+            1,
+            2
+        ]
+    }
+}
+]

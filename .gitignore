@@ -4,5 +4,8 @@
 *.egg-info
 localsettings.py
 /.tox/
+/bin/
 /docs/build/
+/include/
+/lib/
 /pip-selfcheck.json
