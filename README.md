@@ -23,3 +23,8 @@ And visit http://localhost:8000/admin/:
 
 * See macros you can define at will: http://localhost:8000/admin/django_bind/macro/
 * See zones you can create: http://localhost:8000/admin/django_bind/zone/
+* This is what the zone file would look like - also available without the GET parameter in
+  the "RENDER" button at the top right when viewing a zone:
+
+  * http://localhost:8000/admin/django_bind/zone/1/actions/render_template/?view=internal
+  * http://localhost:8000/admin/django_bind/zone/1/actions/render_template/?view=external
